@@ -6,7 +6,7 @@
   "repository": "https://github.com/nako-app/demo-bot",
   "dependencies": {
     "husky": "^4.3.6",
-    "lambda-ssm-loader": "nako-app/lambda-ssm-loader#master",
+    "lambda-ssm-loader": "^1.0.0",
     "node-fetch": "^2.6.1"
   },
   "author": "Nako",
