@@ -1,0 +1,70 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'api
+
+  '
+Globals:
+  Function:
+    Timeout: 3
+Resources:
+  DemoFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: DemoFunction
+      Environment:
+        Variables:
+          API_ENDPOINT: https://api.nako.co
+      Handler: app.lambdaHandler
+      MemorySize: 1024
+      Role:
+        Fn::GetAtt:
+        - LambdaBasicRole
+        - Arn
+      Runtime: nodejs12.x
+  LambdaBasicRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+      - PolicyName: IngestParameterAccess
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - ssm:GetParameter
+            - ssm:GetParameters
+            - ssm:GetParametersByPath
+            Resource: '*'
+      - PolicyName: IngestXRayAccess
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - xray:PutTraceSegments
+            - xray:PutTelemetryRecords
+            Resource: '*'
+Outputs:
+  DemoFunction:
+    Description: Demo Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - DemoFunction
+      - Arn
+  LambdaBasicIamRole:
+    Description: IAM Role common to all Lambdas
+    Value:
+      Fn::GetAtt:
+      - LambdaBasicRole
+      - Arn
