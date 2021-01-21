@@ -6,6 +6,5 @@ stack_name = "nako-demo"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-dkn5bghgq5fl"
 s3_prefix = "nako-demo"
 region = "us-east-1"
-profile = "default"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
