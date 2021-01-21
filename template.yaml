@@ -19,6 +19,11 @@ Resources:
       MemorySize: 1024
       Role: !GetAtt LambdaBasicRole.Arn
       Runtime: nodejs12.x
+      Events:
+        Demo:
+          Type: Schedule
+          Properties:
+            Schedule: rate(1 hour)
 
   LambdaBasicRole:
     Type: AWS::IAM::Role
