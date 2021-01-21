@@ -7,11 +7,13 @@
   "dependencies": {
     "husky": "^4.3.6",
     "lambda-ssm-loader": "^1.0.0",
+    "nako-server-sdk": "^0.0.4",
     "node-fetch": "^2.6.1"
   },
   "author": "Nako",
   "license": "MIT",
   "scripts": {
+    "deploy": "sam build && sam deploy --no-confirm-changeset",
     "lint": "prettier --config=.prettierrc \"**/*.js\" --write --ignore-unknown"
   },
   "husky": {
