@@ -36,4 +36,4 @@ jobs:
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_USERNAME: 'demobot'
-          SLACK_ICON_EMOJI: ':robot:'
+          SLACK_ICON_EMOJI: ':robot_face:'
