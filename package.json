@@ -7,7 +7,7 @@
   "dependencies": {
     "husky": "^4.3.6",
     "lambda-ssm-loader": "^1.0.0",
-    "nako-server-sdk": "^0.0.4",
+    "nako-server-sdk": "^0.0.5",
     "node-fetch": "^2.6.1"
   },
   "author": "Nako",
