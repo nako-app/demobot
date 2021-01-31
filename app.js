@@ -19,6 +19,9 @@ exports.lambdaHandler = async (event, context) => {
         id: '12345',
         firstName: 'John',
         lastName: 'Doe'
+      },
+      result: {
+        status: 'success'
       }
     })
 
