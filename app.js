@@ -11,18 +11,25 @@ exports.lambdaHandler = async (event, context) => {
     const response = await sdk.createActivity({
       happenedAt: Date.now(),
       operation: 'CREATE',
-      resources: [{
-        id: '12345',
-        name: 'My Support Case'
-      }],
-      actors: [{
-        id: '12345',
-        firstName: 'John',
-        lastName: 'Doe',
-        isPrimary: true
-      }],
+      resources: [
+        {
+          id: '12345',
+          name: 'My Support Case'
+        }
+      ],
+      actors: [
+        {
+          id: '12345',
+          firstName: 'John',
+          lastName: 'Doe',
+          isPrimary: true
+        }
+      ],
       result: {
         status: 'success'
+      },
+      state: {
+        status: 'completed'
       }
     })
 
