@@ -20,10 +20,10 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "mkdirp ../dist || true",
-    "build": "npm run prebuild && npm run copy-dependencies && tsc",
     "copy-dependencies": "cpx \"./node_modules/**/*\" ../dist/node_modules && cpx \"./package.json\" \"./dist\"",
-    "deploy": "sam build && sam deploy --no-confirm-changeset",
-    "lint": "prettier --config=.prettierrc \"**/*.js\" --write --ignore-unknown"
+    "build": "npm run prebuild && npm run copy-dependencies && tsc && sam build",
+    "deploy": "sam deploy --no-confirm-changeset",
+    "lint": "prettier --config=.prettierrc \"**/*.(js|ts)\" --write --ignore-unknown"
   },
   "husky": {
     "hooks": {

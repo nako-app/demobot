@@ -1,18 +1,15 @@
-import initializeConfig from 'lambda-ssm-loader/config.js'
-import nakoSdk from 'nako-server-sdk'
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
+import ssmLoader from 'lambda-ssm-loader'
+import { NakoIngestApi } from 'nako-server-sdk'
 
-export const lambdaHandler = async (
-  event: APIGatewayProxyEvent
-): Promise<APIGatewayProxyResult> => {
+export async function lambdaHandler(event, context) {
   console.log('Loading config')
 
   try {
-    await initializeConfig('/prod/demo')
+    await ssmLoader.initializeConfig('/prod/demo')
 
     const apiKey = process.env['API_KEY'] ?? ''
 
-    const sdk = nakoSdk.NakoIngestApi.init(apiKey)
+    const sdk = NakoIngestApi.init(apiKey)
 
     const response = await sdk.createActivity({
       happenedAt: new Date(),
