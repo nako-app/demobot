@@ -11,7 +11,7 @@ Resources:
   DemoFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: .
+      CodeUri: dist/
       Environment:
         Variables:
           API_ENDPOINT: 'https://api.nako.co'
