@@ -1,8 +1,49 @@
 import ssmLoader from 'lambda-ssm-loader'
 import { NakoIngestApi } from 'nako-server-sdk'
+import { ActivityResultStatus, ActivityStateStatus, ActivityType } from 'nako-server-sdk/types'
+import { v4 as uuid } from 'uuid'
+import randomInt from 'random-int'
+import randomItem from 'random-item'
 
 export async function lambdaHandler(event, context) {
   console.log('Loading config')
+
+  let possibleFirstNames = [
+    'Gabriel',
+    'Oswaldo',
+    'Josephine',
+    'Riley',
+    'Vicki',
+    'Shawn',
+    'Elisabeth',
+    'Lester',
+    'Vance',
+    'Jerry',
+    'Michael'
+  ]
+
+  let possibleLastNames = [
+    'Richmond',
+    'Vaughn',
+    'Mccormick',
+    'Boyd',
+    'Kirk',
+    'Carroll',
+    'Thornton',
+    'Vincent',
+    'Schneider',
+    'Tucker'
+  ]
+
+  let possibleOperations = ['CREATE', 'REMOVE', 'TRAIN', 'SWITCH_TRAFFIC', 'START', 'MONITOR']
+
+  let possibleRessourceNames = [
+    'MACHINE_LEARNING_MODEL',
+    'WORKFLOW',
+    'PROJECT',
+    'USER',
+    'SUPPORT_CASE'
+  ]
 
   try {
     await ssmLoader.initializeConfig('/prod/demo')
@@ -13,26 +54,31 @@ export async function lambdaHandler(event, context) {
 
     const response = await sdk.createActivity({
       happenedAt: new Date(),
-      operation: 'CREATE',
+      operation: randomItem(possibleOperations),
       resources: [
         {
-          id: '12345',
-          name: 'My Support Case'
+          id: uuid,
+          name: randomItem(possibleRessourceNames)
         }
       ],
       actors: [
         {
-          id: '12345',
-          firstName: 'John',
-          lastName: 'Doe'
+          id: uuid,
+          firstName: randomItem(possibleFirstNames),
+          lastName: randomItem(possibleLastNames),
+          type: ActivityType.User
         }
       ],
       result: {
-        status: 'success'
+        status: ActivityResultStatus.Success
       },
       state: {
-        status: 'completed'
-      }
+        status: ActivityStateStatus.Completed
+      },
+      metadata: new Map<string, number>([
+        ['customer_organization_id', randomInt(1000)],
+        ['version', randomInt(5)]
+      ])
     })
 
     console.log(response)
