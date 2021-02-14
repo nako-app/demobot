@@ -1,15 +1,18 @@
-const { initializeConfig } = require('lambda-ssm-loader')
-const { NakoIngestApi } = require('nako-server-sdk')
+import ssmLoader from 'lambda-ssm-loader'
+import { NakoIngestApi } from 'nako-server-sdk'
 
-exports.lambdaHandler = async (event, context) => {
+export async function lambdaHandler(event, context) {
+  console.log('Loading config')
+
   try {
-    console.log('Loading config')
+    await ssmLoader.initializeConfig('/prod/demo')
 
-    await initializeConfig('/prod/demo')
-    const sdk = NakoIngestApi.init(process.env.API_KEY)
+    const apiKey = process.env['API_KEY'] ?? ''
+
+    const sdk = NakoIngestApi.init(apiKey)
 
     const response = await sdk.createActivity({
-      happenedAt: Date.now(),
+      happenedAt: new Date(),
       operation: 'CREATE',
       resources: [
         {
@@ -21,8 +24,7 @@ exports.lambdaHandler = async (event, context) => {
         {
           id: '12345',
           firstName: 'John',
-          lastName: 'Doe',
-          isPrimary: true
+          lastName: 'Doe'
         }
       ],
       result: {
@@ -36,7 +38,8 @@ exports.lambdaHandler = async (event, context) => {
     console.log(response)
 
     return {
-      statusCode: 200
+      statusCode: 200,
+      body: ''
     }
   } catch (err) {
     console.log(err)
