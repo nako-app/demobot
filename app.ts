@@ -24,7 +24,8 @@ export async function lambdaHandler(event, context) {
         {
           id: '12345',
           firstName: 'John',
-          lastName: 'Doe'
+          lastName: 'Doe',
+          isPrimary: true
         }
       ],
       result: {
