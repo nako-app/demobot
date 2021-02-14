@@ -1,6 +1,5 @@
 import ssmLoader from 'lambda-ssm-loader'
-import { NakoIngestApi } from 'nako-server-sdk'
-import { ActivityResultStatus, ActivityStateStatus, ActivityType } from 'nako-server-sdk/types'
+import { NakoIngestApi, ActivityResultStatus, ActivityStateStatus, ActivityActorType } from 'nako-server-sdk'
 import { v4 as uuid } from 'uuid'
 import randomInt from 'random-int'
 import randomItem from 'random-item'
@@ -66,7 +65,7 @@ export async function lambdaHandler(event, context) {
           id: uuid,
           firstName: randomItem(possibleFirstNames),
           lastName: randomItem(possibleLastNames),
-          type: ActivityType.User
+          type: ActivityActorType.User
         }
       ],
       result: {
