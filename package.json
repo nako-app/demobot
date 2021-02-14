@@ -6,7 +6,7 @@
   "repository": "https://github.com/nako-app/demo-bot",
   "dependencies": {
     "lambda-ssm-loader": "^1.0.0",
-    "nako-server-sdk": "^0.0.16",
+    "nako-server-sdk": "^0.0.20",
     "node-fetch": "^2.6.1",
     "typescript": "^4.1.3"
   },

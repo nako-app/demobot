@@ -1,5 +1,5 @@
 import ssmLoader from 'lambda-ssm-loader'
-import { NakoIngestApi } from 'nako-server-sdk'
+import { NakoIngestApi, ActivityResultStatus, ActivityStateStatus } from 'nako-server-sdk'
 
 export async function lambdaHandler(event, context) {
   console.log('Loading config')
@@ -29,10 +29,10 @@ export async function lambdaHandler(event, context) {
         }
       ],
       result: {
-        status: 'success'
+        status: ActivityResultStatus.Success
       },
       state: {
-        status: 'completed'
+        status: ActivityStateStatus.Completed
       }
     })
 
