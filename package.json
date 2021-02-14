@@ -17,7 +17,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "copy": "cpx \"./node_modules/**/*\" ./dist/node_modules && cpx package.json ./dist",
+    "copy": "copyfiles \"./node_modules/**/*\" ./dist/node_modules && copyfiles package.json ./dist",
     "deploy": "npm run build && npm run copy && sam build && sam deploy --no-confirm-changeset",
     "lint": "prettier --config=.prettierrc \"**/*.(js|ts)\" --write --ignore-unknown"
   },
@@ -29,7 +29,7 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.71",
     "@types/node": "^14.14.25",
-    "cpx": "^1.5.0",
+    "copyfiles": "^2.4.1",
     "husky": "^4.3.8"
   }
 }

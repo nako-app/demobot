@@ -1,5 +1,10 @@
 import ssmLoader from 'lambda-ssm-loader'
-import { NakoIngestApi, ActivityResultStatus, ActivityStateStatus, ActivityActorType } from 'nako-server-sdk'
+import {
+  NakoIngestApi,
+  ActivityResultStatus,
+  ActivityStateStatus,
+  ActivityActorType
+} from 'nako-server-sdk'
 import { v4 as uuid } from 'uuid'
 import randomInt from 'random-int'
 import randomItem from 'random-item'
