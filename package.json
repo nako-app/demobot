@@ -5,7 +5,6 @@
   "main": "app.js",
   "repository": "https://github.com/nako-app/demo-bot",
   "dependencies": {
-    "husky": "^5.0.9",
     "lambda-ssm-loader": "^1.0.0",
     "nako-server-sdk": "^0.0.14",
     "node-fetch": "^2.6.1",
@@ -21,12 +20,17 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "**/*.ts": "prettier --write --ignore-unknown"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.71",
     "@types/node": "^14.14.25",
-    "cpx": "^1.5.0"
+    "cpx": "^1.5.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4"
   }
 }
