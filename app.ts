@@ -86,8 +86,6 @@ export async function lambdaHandler(event, context) {
       ])
     })
 
-    response.operation
-
     console.log(response)
 
     return {
