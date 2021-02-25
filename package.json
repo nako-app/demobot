@@ -17,7 +17,6 @@
     "copy": "cpx \"./node_modules/**/*\" ./dist/node_modules && cpx package.json ./dist",
     "deploy": "npm run build && npm run copy && sam build && sam deploy --no-confirm-changeset",
     "lint": "prettier --config=.prettierrc \"**/*.(js|ts)\" --write --ignore-unknown",
-    "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
     "postpublish": "pinst --enable",
     "pre-commit": "lint-staged"
