@@ -8,13 +8,16 @@
     "lambda-ssm-loader": "^1.0.0",
     "nako-server-sdk": "^0.0.21",
     "node-fetch": "^2.6.1",
-    "typescript": "^4.2.2"
+    "random-int": "^2.0.1",
+    "random-item": "^3.1.0",
+    "typescript": "^4.2.2",
+    "uuid": "^8.3.2"
   },
   "author": "Nako",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "copy": "cpx \"./node_modules/**/*\" ./dist/node_modules && cpx package.json ./dist",
+    "copy": "copyfiles \"./node_modules/**/*\" ./dist/node_modules && copyfiles package.json ./dist",
     "deploy": "npm run build && npm run copy && sam build && sam deploy --no-confirm-changeset",
     "lint": "prettier --config=.prettierrc \"**/*.(js|ts)\" --write --ignore-unknown",
     "prepublishOnly": "pinst --disable",

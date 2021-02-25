@@ -1,8 +1,54 @@
 import ssmLoader from 'lambda-ssm-loader'
-import { NakoIngestApi, ActivityResultStatus, ActivityStateStatus } from 'nako-server-sdk'
+import {
+  NakoIngestApi,
+  ActivityResultStatus,
+  ActivityStateStatus,
+  ActivityActorType,
+  CreatedActivity
+} from 'nako-server-sdk'
+import { v4 as uuid } from 'uuid'
+import randomInt from 'random-int'
+import randomItem from 'random-item'
 
 export async function lambdaHandler(event, context) {
   console.log('Loading config')
+
+  let possibleFirstNames = [
+    'Gabriel',
+    'Oswaldo',
+    'Josephine',
+    'Riley',
+    'Vicki',
+    'Shawn',
+    'Elisabeth',
+    'Lester',
+    'Vance',
+    'Jerry',
+    'Michael'
+  ]
+
+  let possibleLastNames = [
+    'Richmond',
+    'Vaughn',
+    'Mccormick',
+    'Boyd',
+    'Kirk',
+    'Carroll',
+    'Thornton',
+    'Vincent',
+    'Schneider',
+    'Tucker'
+  ]
+
+  let possibleOperations = ['CREATE', 'REMOVE', 'TRAIN', 'SWITCH_TRAFFIC', 'START', 'MONITOR']
+
+  let possibleRessourceNames = [
+    'MACHINE_LEARNING_MODEL',
+    'WORKFLOW',
+    'PROJECT',
+    'USER',
+    'SUPPORT_CASE'
+  ]
 
   try {
     await ssmLoader.initializeConfig('/prod/demo')
@@ -11,21 +57,21 @@ export async function lambdaHandler(event, context) {
 
     const sdk = NakoIngestApi.init(apiKey)
 
-    const response = await sdk.createActivity({
+    const response: CreatedActivity = await sdk.createActivity({
       happenedAt: new Date(),
-      operation: 'CREATE',
+      operation: randomItem(possibleOperations),
       resources: [
         {
-          id: '12345',
-          name: 'My Support Case'
+          id: uuid,
+          name: randomItem(possibleRessourceNames)
         }
       ],
       actors: [
         {
-          id: '12345',
-          firstName: 'John',
-          lastName: 'Doe',
-          isPrimary: true
+          id: uuid,
+          firstName: randomItem(possibleFirstNames),
+          lastName: randomItem(possibleLastNames),
+          type: ActivityActorType.User
         }
       ],
       result: {
@@ -33,7 +79,11 @@ export async function lambdaHandler(event, context) {
       },
       state: {
         status: ActivityStateStatus.Completed
-      }
+      },
+      metadata: new Map<string, number>([
+        ['customer_organization_id', randomInt(1000)],
+        ['version', randomInt(5)]
+      ])
     })
 
     console.log(response)
