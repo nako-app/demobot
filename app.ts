@@ -3,7 +3,8 @@ import {
   NakoIngestApi,
   ActivityResultStatus,
   ActivityStateStatus,
-  ActivityActorType
+  ActivityActorType,
+  CreatedActivity
 } from 'nako-server-sdk'
 import { v4 as uuid } from 'uuid'
 import randomInt from 'random-int'
@@ -56,7 +57,7 @@ export async function lambdaHandler(event, context) {
 
     const sdk = NakoIngestApi.init(apiKey)
 
-    const response = await sdk.createActivity({
+    const response: CreatedActivity = await sdk.createActivity({
       happenedAt: new Date(),
       operation: randomItem(possibleOperations),
       resources: [
@@ -84,6 +85,8 @@ export async function lambdaHandler(event, context) {
         ['version', randomInt(5)]
       ])
     })
+
+    response.operation
 
     console.log(response)
 
