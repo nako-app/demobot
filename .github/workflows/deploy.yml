@@ -49,3 +49,11 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           SLACK_USERNAME: 'demobot'
           SLACK_ICON_EMOJI: ':robot_face:'
+      - uses: rtCamp/action-slack-notify@master
+        if: failure()
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: 'demobot'
+          SLACK_ICON_EMOJI: ':robot_face:'
+          SLACK_COLOR: '#ff0000'
+          SLACK_MESSAGE: ':rotating_light: Build failure!'
