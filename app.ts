@@ -42,7 +42,7 @@ export async function lambdaHandler(event, context) {
 
   let possibleOperations = ['CREATE', 'REMOVE', 'TRAIN', 'SWITCH_TRAFFIC', 'START', 'MONITOR']
 
-  let possibleRessourceNames = [
+  let possibleResourceTypes = [
     'MACHINE_LEARNING_MODEL',
     'WORKFLOW',
     'PROJECT',
@@ -63,7 +63,7 @@ export async function lambdaHandler(event, context) {
       resources: [
         {
           id: uuid,
-          name: randomItem(possibleRessourceNames)
+          type: randomItem(possibleResourceTypes)
         }
       ],
       actors: [
