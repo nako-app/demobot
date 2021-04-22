@@ -8,7 +8,7 @@
     "lambda-ssm-loader": "^1.0.0",
     "nako-server-sdk": "^0.0.22",
     "node-fetch": "^2.6.1",
-    "random-int": "^2.0.1",
+    "random-int": "^3.0.0",
     "random-item": "^3.1.0",
     "typescript": "^4.2.2",
     "uuid": "^8.3.2"
